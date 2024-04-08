@@ -4,15 +4,12 @@ Dependencies:
 
 glm
 
-glad
+glew 2.1.0. Other versions may work.
 
 glfw 3.4. Other versions such as 3.3 may work.
 
-
-This repo comes with glfw preinstalled and "statically linked"?
-
 Tested on Ubuntu/Kubuntu 22.04
-
+The dependencies are local to the project and statically linked for greater portability.
 
 ## Build setup
 ### Download GLAD and GLFW

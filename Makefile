@@ -12,17 +12,17 @@ executableName=lookdraw
 
 
 
-#Includes and static binary inclusions
+#Includes
+glfwIncludeFolder = deps/GLFW/include
+glewIncludeFolder = deps/glew-2.1.0/include
 
-glfwIncludeDirectory = deps/GLFW/include
-glfwLibraryDirectory = deps/GLFW/lib
-gladIncludeFolder = deps/glad/include
+#Static binary inclusions
+glfwLibraryFolder = deps/GLFW/lib
+glewLibraryFolder = deps/glew-2.1.0/lib
 
 
-
-
-cxxFlags=-Wall -std=c++11 -I$(glfwIncludeDirectory) -I$(gladIncludeFolder)
-LDflags=-L$(glfwLibraryDirectory) -lglfw3
+cxxFlags=-Wall -std=c++11 -I$(glfwIncludeFolder) -I$(glewIncludeFolder)
+LDflags=-L$(glfwLibraryFolder) -lglfw3 -L$(glewLibraryFolder) -lGLEW
 
 
 # #Main rule
