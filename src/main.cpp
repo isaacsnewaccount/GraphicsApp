@@ -1,38 +1,20 @@
-#include <GL/glew.h>
-#include <GLFW/glfw3.h>
-//#include <stdio.h>
-
-
 #include <iostream>
 #include <cstdlib>
+// #include <GL/glew.h>
+//#include <GL/gl.h> //include system GL (on linux: /usr/include/GL)
+
+#include <GLFW/glfw3.h>
+
 #include "message.h"
 
-
 using namespace std;
-
-
 
 // Function declaration
 int add(int a, int b);
 
-
 int main(void) {
-	//printf("Hello, world!\n");
-
-    int num1 = 5;
-    int num2 = 7;
-
-    // Function call
-    int result = add(num1, num2);
-
-    std::cout << "The sum of " << num1 << " and " << num2 << " is " << result << std::endl;
-
-
     message message;
     message.printMessage();
-
-
-
 
     // Initialize GLFW
     if (!glfwInit()) {
@@ -46,13 +28,22 @@ int main(void) {
         return -1;
     }
 
+
+    // GLenum err = glewInit();
+    // if (GLEW_OK != err) {
+    //     // Problem: glewInit failed, something is seriously wrong.
+    //     std::cerr << "Error: " << glewGetErrorString(err) << std::endl;
+    // }
+
+
+
     // Make the window's context current
     glfwMakeContextCurrent(window);
 
     // Loop until the user closes the window
     while (!glfwWindowShouldClose(window)) {
         // Clear the screen
-        //glClear(GL_COLOR_BUFFER_BIT);
+        glClear(GL_COLOR_BUFFER_BIT);
 
         // Render OpenGL here
 

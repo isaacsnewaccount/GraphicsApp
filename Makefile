@@ -1,6 +1,7 @@
 cxx=g++
 srcDir=src
-cxxFlags=-Wall -std=c++11 
+cxxFlags=-Wall -std=c++11
+#-lGL -lGLU is for openGL
 
 # Source files
 sources = src/main.cpp src/message.cpp
@@ -22,7 +23,7 @@ glewLibraryFolder = deps/glew-2.1.0/lib
 
 
 cxxFlags=-Wall -std=c++11 -I$(glfwIncludeFolder) -I$(glewIncludeFolder)
-LDflags=-L$(glfwLibraryFolder) -lglfw3 -L$(glewLibraryFolder) -lGLEW
+LDflags=-L$(glfwLibraryFolder) -lglfw3 -L$(glewLibraryFolder) -lGLEW -lGL -lGLU
 
 
 # #Main rule
