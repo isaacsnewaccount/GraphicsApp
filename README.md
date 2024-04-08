@@ -29,13 +29,10 @@ https://github.com/glfw/glfw/releases/download/3.4/glfw-3.4.zipd
 
 unzip the GLFW download.
 
-make the include folders in the include directory:
 
-sudo mkdir -p /usr/include/GLFW
+optionally build GLFW to replace the .a file for linux development.
+GLFW is statically linked in this application.
 
-sudo mkdir -p /usr/include/glad
-
-put glfw3.h and glfw3native.h into the /usr/include/GLFW folder
 
 ### Build and install GLFW
 #### Dependencies
@@ -60,6 +57,10 @@ then cd into the "build" folder and run "make":
 cd build
 
 make
+
+get the glfw3.h and glfw3native.h files and put them in lookdraw's deps/GLFW/include folder.
+
+on linux, get the libglfw3.a file and put it in lookdraw's deps/GLFW/lib folder.
 
 
 ## Building
