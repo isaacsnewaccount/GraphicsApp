@@ -1,11 +1,13 @@
+cxx = g++
+
 output: main.o message.o
-	g++ main.o message.o -o lookdraw
+	$(cxx) main.o message.o -o lookdraw
 
 main.o: main.cpp
-	g++ -c main.cpp
+	$(cxx) -c main.cpp
 
 message.o: message.cpp message.h
-	g++ -c message.cpp
+	$(cxx) -c message.cpp
 
 clean:
 	rm main.o message.o lookdraw
