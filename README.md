@@ -22,6 +22,8 @@ GLFW example link:
 https://github.com/glfw/glfw/releases/download/3.4/glfw-3.4.zipd
 
 
-### make the include folders in the include directory
+make the include folders in the include directory
 sudo mkdir -p /usr/include/GLFW
 sudo mkdir -p /usr/include/glad
+
+put glfw3.h and glfw3native.h into the /usr/include/GLFW folder
