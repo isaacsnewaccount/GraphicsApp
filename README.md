@@ -9,6 +9,8 @@ glad
 glfw 3.4. Other versions such as 3.3 may work.
 
 
+This repo comes with glfw preinstalled and "statically linked"?
+
 Tested on Ubuntu/Kubuntu 22.04
 
 
