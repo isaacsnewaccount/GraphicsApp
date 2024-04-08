@@ -29,7 +29,7 @@ int main(void) {
     // Loop until the user closes the window
     while (!glfwWindowShouldClose(window)) {
         // Clear the screen
-        glClear(GL_COLOR_BUFFER_BIT);
+        //glClear(GL_COLOR_BUFFER_BIT);
 
         // Render OpenGL here
 
