@@ -1,4 +1,4 @@
-//#include <glad/glad.h>
+#include <glad/glad.h>
 #include <GLFW/glfw3.h>
 //#include <stdio.h>
 
@@ -8,8 +8,31 @@
 #include "message.h"
 
 
+using namespace std;
+
+
+
+// Function declaration
+int add(int a, int b);
+
+
 int main(void) {
 	//printf("Hello, world!\n");
+
+    int num1 = 5;
+    int num2 = 7;
+
+    // Function call
+    int result = add(num1, num2);
+
+    std::cout << "The sum of " << num1 << " and " << num2 << " is " << result << std::endl;
+
+
+    message message;
+    message.printMessage();
+
+
+
 
     // Initialize GLFW
     if (!glfwInit()) {
@@ -46,30 +69,6 @@ int main(void) {
 }
 
 
-
-
-
-using namespace std;
-
-// Function declaration
-int add(int a, int b);
-
-int main2() {
-    int num1 = 5;
-    int num2 = 7;
-
-    // Function call
-    int result = add(num1, num2);
-
-    std::cout << "The sum of " << num1 << " and " << num2 << " is: " << result << std::endl;
-
-
-    message message;
-    message.printMessage();
-
-
-    return 0;
-}
 
 // Function definition
 int add(int a, int b) {
