@@ -1,5 +1,7 @@
 cxx = g++
 
+#linkFlags = -lglfw3
+
 output: main.o message.o
 	$(cxx) main.o message.o -o lookdraw
 
