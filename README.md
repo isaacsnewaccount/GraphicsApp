@@ -10,7 +10,7 @@ glfw 3.4. Other versions such as 3.3 may work.
 Tested on Ubuntu/Kubuntu 22.04
 
 
-## Building
+## Build setup
 ### Download GLAD and GLFW
 
 GLAD example link (Download API gl version 4.6 for example):
@@ -27,3 +27,8 @@ sudo mkdir -p /usr/include/GLFW
 sudo mkdir -p /usr/include/glad
 
 put glfw3.h and glfw3native.h into the /usr/include/GLFW folder
+
+## Building
+type "make" at the terminal
+
+to run, type "./lookdraw"

@@ -61,7 +61,7 @@ int main() {
 
 
     message message;
-    message.printMEssage();
+    message.printMessage();
 
 
     return 0;
