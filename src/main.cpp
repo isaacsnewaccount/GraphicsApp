@@ -2,10 +2,10 @@
 #include <GLFW/glfw3.h>
 #include <iostream>
 #include "message.h"
+#include "input.h"
 
 // Function declarations
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
-void processInput(GLFWwindow *window);
 void initializeGLFW();
 GLFWwindow* createWindow(int width, int height, const char* title);
 void initializeGLAD();
@@ -38,7 +38,7 @@ const char *fragmentShaderSource = R"(
 )";
 
 int main(void) {
-    message message;
+    Message message;
     message.printMessage();
 
     initializeGLFW();
@@ -56,6 +56,11 @@ int main(void) {
     setupVertexArray(VAO, VBO);
 
     unsigned int shaderProgram = createShaderProgram(vertexShaderSource, fragmentShaderSource);
+
+
+    // Set callback functions
+    glfwSetMouseButtonCallback(window, mouse_callback);
+    glfwSetCursorPosCallback(window, cursor_position_callback);
 
     // Render loop
     while (!glfwWindowShouldClose(window)) {
@@ -171,13 +176,6 @@ void setupVertexArray(unsigned int VAO, unsigned int VBO) {
     glBindBuffer(GL_ARRAY_BUFFER, VBO);
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
     glEnableVertexAttribArray(0);
-}
-
-void processInput(GLFWwindow *window) {
-    if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS || 
-        (glfwGetKey(window, GLFW_KEY_LEFT_CONTROL) == GLFW_PRESS && glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)) {
-        glfwSetWindowShouldClose(window, true);
-    }
 }
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height) {

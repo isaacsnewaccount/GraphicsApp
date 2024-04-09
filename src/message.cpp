@@ -2,6 +2,6 @@
 #include "message.h"
 using namespace std;
 
-void message::printMessage() {
+void Message::printMessage() {
 	cout << "Example Message\n";
 }

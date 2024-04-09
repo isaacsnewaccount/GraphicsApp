@@ -1,7 +1,7 @@
 #ifndef message_h
 #define message_h
 
-class message {
+class Message {
 public:
 	void printMessage();
 };
