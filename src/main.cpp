@@ -5,12 +5,16 @@
 
 using namespace std;
 
-bool shouldClose = false;
+bool appShouldClose = false;
 
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
 {
     if (key == GLFW_KEY_W && action == GLFW_PRESS && mods == GLFW_MOD_CONTROL) {
-        shouldClose = true; //exit program flag
+        appShouldClose = true; //exit program flag
+    }
+
+    if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS) {
+        appShouldClose = true; //exit program flag
     }
 }
 
@@ -62,8 +66,10 @@ int main(void) {
 
     glLineWidth(0.1f); //make the lines thinner (unsupported?)
 
+
+
     // Loop until the user closes the window
-    while (!glfwWindowShouldClose(window) && !shouldClose) {
+    while (!glfwWindowShouldClose(window) && !appShouldClose) {
         // Clear the screen
         glClear(GL_COLOR_BUFFER_BIT);
 
