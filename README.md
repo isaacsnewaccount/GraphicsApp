@@ -12,6 +12,8 @@ Tested on Ubuntu/Kubuntu 22.04
 
 The dependencies are local to the project and statically linked for greater portability.
 
+A computer capable of running OpenGL 3.3 applications. (2010 standard)
+
 ## Legal Notice
 The authors of this software include the operator of the "Isaacsnewaccount" GitHub account.
 
