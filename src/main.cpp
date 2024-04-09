@@ -1,103 +1,90 @@
-#include <iostream>
-//#include <cstdlib>
+#include <glad/glad.h>
 #include <GLFW/glfw3.h>
+
+#include <iostream>
 #include "message.h"
 
-using namespace std;
+void framebuffer_size_callback(GLFWwindow* window, int width, int height);
+void processInput(GLFWwindow *window);
 
-bool appShouldClose = false;
-
-void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
-{
-    if (key == GLFW_KEY_W && action == GLFW_PRESS && mods == GLFW_MOD_CONTROL) {
-        appShouldClose = true; //exit program flag
-    }
-
-    if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS) {
-        appShouldClose = true; //exit program flag
-    }
-}
+// settings
+const unsigned int screenWidth = 800;
+const unsigned int screenHeight = 600;
 
 int main(void) {
+
     message message;
     message.printMessage();
 
+    // GLFW: initialize and configure
+    // ------------------------------
+    glfwInit();
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
-    // Initialize GLFW
-    if (!glfwInit()) {
-        std::cerr << "Failed to initialize GLFW" << std::endl;
-        return -1;
-    }
+#ifdef __APPLE__
+    glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
+#endif
 
-    // Enable MSAA with 4 samples
-    //glfwWindowHint(GLFW_SAMPLES, 4);
-
-    // Create a windowed mode window and its OpenGL context
-    GLFWwindow* window = glfwCreateWindow(800, 600, "Lookdraw", NULL, NULL);
-    if (!window) {
+    // GLFW window creation
+    // --------------------
+    GLFWwindow* window = glfwCreateWindow(screenWidth, screenHeight, "Lookdraw", NULL, NULL);
+    if (window == NULL)
+    {
+        std::cout << "Failed to create GLFW window" << std::endl;
         glfwTerminate();
-        std::cerr << "Failed to create GLFW window" << std::endl;
         return -1;
     }
-
-    glfwSetKeyCallback(window, key_callback);
-
-    // Make the window's context current
     glfwMakeContextCurrent(window);
+    glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
 
-
-
-
-
-    glEnable(GL_BLEND);
-    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-
-
-    //configure lines
-    glEnable(GL_LINE_SMOOTH);
-
-    // Querying the range of supported aliased line widths
-    GLfloat lineWidthRange[2];
-    glGetFloatv(GL_ALIASED_LINE_WIDTH_RANGE, lineWidthRange);
-
-    // Output the retrieved range
-    std::cout << "Supported Aliased Line Width Range: [" << lineWidthRange[0] << ", " << lineWidthRange[1] << "]" << std::endl;
-
-
-    glLineWidth(0.1f); //make the lines thinner (unsupported?)
+    // glad: load all OpenGL function pointers
+    // ---------------------------------------
+    if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
+    {
+        std::cout << "Failed to initialize GLAD" << std::endl;
+        return -1;
+    }    
 
     std::cout << "OpenGL version: " << glGetString(GL_VERSION) << std::endl;
-
-
-    // Loop until the user closes the window
-    while (!glfwWindowShouldClose(window) && !appShouldClose) {
-        // Clear the screen
-        glClear(GL_COLOR_BUFFER_BIT);
+    
+    // Render loop
+    // -----------
+    while (!glfwWindowShouldClose(window))
+    {
+        // input
+        // -----
+        processInput(window);
 
         // Render OpenGL here
-        glBegin(GL_LINES);
-        glVertex2f(-0.5f, -0.5f);
-        glVertex2f(0.0f, 0.5f);
-        glEnd();
 
-        glBegin(GL_LINES);
-        glVertex2f(0.0f, 0.5f);
-        glVertex2f(0.5f, -0.5f);
-        glEnd();
 
-        glBegin(GL_LINES);
-        glVertex2f(0.5f, -0.5f);
-        glVertex2f(-0.5f, -0.5f);
-        glEnd();
-
-        // Swap front and back buffers
+        // glfw: swap buffers and poll IO events (keys pressed/released, mouse moved etc.)
+        // -------------------------------------------------------------------------------
         glfwSwapBuffers(window);
-
-        // Poll for and process events
         glfwPollEvents();
     }
 
-    // Terminate GLFW
+    // glfw: terminate, clearing all previously allocated GLFW resources.
+    // ------------------------------------------------------------------
     glfwTerminate();
     return 0;
+}
+
+// process all input: query GLFW whether relevant keys are pressed/released this frame and react accordingly
+// ---------------------------------------------------------------------------------------------------------
+void processInput(GLFWwindow *window)
+{
+    if(glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
+        glfwSetWindowShouldClose(window, true);
+}
+
+// glfw: whenever the window size changed (by OS or user resize) this callback function executes
+// ---------------------------------------------------------------------------------------------
+void framebuffer_size_callback(GLFWwindow* window, int width, int height)
+{
+    // make sure the viewport matches the new window dimensions; note that width and 
+    // height will be significantly larger than specified on retina displays.
+    glViewport(0, 0, width, height);
 }
