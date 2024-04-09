@@ -51,8 +51,7 @@ int main(void) {
 
     // Render loop
     // -----------
-    while (!glfwWindowShouldClose(window))
-    {
+    while (!glfwWindowShouldClose(window)) {
         // input
         // -----
         processInput(window);
