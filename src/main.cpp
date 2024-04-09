@@ -12,12 +12,22 @@ using namespace std;
 // Function declaration
 int add(int a, int b);
 
+void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
+{
+    if (key == GLFW_KEY_W && action == GLFW_PRESS && mods == GLFW_MOD_CONTROL) {
+        std::cout << "Control+W pressed" << std::endl;
+    }
+}
+
+
 int main(void) {
     message message;
     message.printMessage();
 
+
     // Initialize GLFW
     if (!glfwInit()) {
+        std::cerr << "Failed to initialize GLFW" << std::endl;
         return -1;
     }
 
@@ -25,17 +35,12 @@ int main(void) {
     GLFWwindow* window = glfwCreateWindow(640, 480, "OpenGL Window", NULL, NULL);
     if (!window) {
         glfwTerminate();
+        std::cerr << "Failed to create GLFW window" << std::endl;
         return -1;
     }
 
-
-    // GLenum err = glewInit();
-    // if (GLEW_OK != err) {
-    //     // Problem: glewInit failed, something is seriously wrong.
-    //     std::cerr << "Error: " << glewGetErrorString(err) << std::endl;
-    // }
-
-
+    // Set key callback
+    glfwSetKeyCallback(window, key_callback);
 
     // Make the window's context current
     glfwMakeContextCurrent(window);
@@ -63,7 +68,6 @@ int main(void) {
     glfwTerminate();
     return 0;
 }
-
 
 
 // Function definition
