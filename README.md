@@ -13,7 +13,9 @@ Tested on Ubuntu/Kubuntu 22.04
 The dependencies are local to the project and statically linked for greater portability.
 
 ## Legal Notice
-All copyright and intellectual property rights pertaining to the materials, content, and any associated creations herein are owned by Isaacsnewaccount under jurisdiction of U.S copyright law. Noncommercial personal use and distribution are permitted. Commercial use and distribution are prohibited.
+The authors of this software include the operator of the "Isaacsnewaccount" GitHub account.
+
+All copyright and intellectual property rights pertaining to the materials, content, and any associated creations herein are owned by the authors under jurisdiction of U.S copyright law. Noncommercial personal use and distribution are permitted. Commercial use and distribution are prohibited.
 
 ## Build setup
 ### Download GLAD and GLFW
