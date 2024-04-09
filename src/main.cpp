@@ -67,6 +67,9 @@ int main(void) {
     glLineWidth(0.1f); //make the lines thinner (unsupported?)
 
 
+    std::cout << "OpenGL version: " << glGetString(GL_VERSION) << std::endl;
+
+
 
     // Loop until the user closes the window
     while (!glfwWindowShouldClose(window) && !appShouldClose) {
