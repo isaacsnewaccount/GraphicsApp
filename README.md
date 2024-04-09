@@ -9,6 +9,7 @@ glad
 glfw 3.4. Other versions such as 3.3 may work.
 
 Tested on Ubuntu/Kubuntu 22.04
+
 The dependencies are local to the project and statically linked for greater portability.
 
 ## Build setup
