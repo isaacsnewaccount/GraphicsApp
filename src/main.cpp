@@ -1,24 +1,18 @@
 #include <iostream>
-#include <cstdlib>
-// #include <GL/glew.h>
-//#include <GL/gl.h> //include system GL (on linux: /usr/include/GL)
-
+//#include <cstdlib>
 #include <GLFW/glfw3.h>
-
 #include "message.h"
 
 using namespace std;
 
-// Function declaration
-int add(int a, int b);
+bool shouldClose = false;
 
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
 {
     if (key == GLFW_KEY_W && action == GLFW_PRESS && mods == GLFW_MOD_CONTROL) {
-        std::cout << "Control+W pressed" << std::endl;
+        shouldClose = true; //exit program flag
     }
 }
-
 
 int main(void) {
     message message;
@@ -31,22 +25,24 @@ int main(void) {
         return -1;
     }
 
+    // Enable MSAA with 4 samples
+    glfwWindowHint(GLFW_SAMPLES, 4);
+
     // Create a windowed mode window and its OpenGL context
-    GLFWwindow* window = glfwCreateWindow(640, 480, "OpenGL Window", NULL, NULL);
+    GLFWwindow* window = glfwCreateWindow(800, 600, "OpenGL Window", NULL, NULL);
     if (!window) {
         glfwTerminate();
         std::cerr << "Failed to create GLFW window" << std::endl;
         return -1;
     }
 
-    // Set key callback
     glfwSetKeyCallback(window, key_callback);
 
     // Make the window's context current
     glfwMakeContextCurrent(window);
 
     // Loop until the user closes the window
-    while (!glfwWindowShouldClose(window)) {
+    while (!glfwWindowShouldClose(window) && !shouldClose) {
         // Clear the screen
         glClear(GL_COLOR_BUFFER_BIT);
 
@@ -67,10 +63,4 @@ int main(void) {
     // Terminate GLFW
     glfwTerminate();
     return 0;
-}
-
-
-// Function definition
-int add(int a, int b) {
-    return a + b;
 }
