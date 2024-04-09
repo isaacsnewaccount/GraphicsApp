@@ -48,7 +48,7 @@ int main(void) {
     }    
 
     std::cout << "OpenGL version: " << glGetString(GL_VERSION) << std::endl;
-    
+
     // Render loop
     // -----------
     while (!glfwWindowShouldClose(window))
@@ -76,8 +76,13 @@ int main(void) {
 // ---------------------------------------------------------------------------------------------------------
 void processInput(GLFWwindow *window)
 {
-    if(glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
+    if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS) {
         glfwSetWindowShouldClose(window, true);
+    }
+
+    if (glfwGetKey(window, GLFW_KEY_LEFT_CONTROL) == GLFW_PRESS && glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS) {
+        glfwSetWindowShouldClose(window, true);
+    }
 }
 
 // glfw: whenever the window size changed (by OS or user resize) this callback function executes
