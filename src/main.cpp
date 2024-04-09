@@ -33,7 +33,7 @@ const char *fragmentShaderSource = R"(
     out vec4 FragColor;
     void main()
     {
-        FragColor = vec4(0.5f, 0.4f, 1.0f, 1.0f);
+        FragColor = vec4(0.98f, 1.0f, 0.6f, 1.0f);
     }
 )";
 
@@ -61,9 +61,10 @@ int main(void) {
     while (!glfwWindowShouldClose(window)) {
         processInput(window);
 
-        glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+        glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
 
+        //enable wireframe mode
         glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
         glUseProgram(shaderProgram);
