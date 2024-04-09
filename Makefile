@@ -1,34 +1,37 @@
-cxx=g++
-cc=gcc
+# Compiler and flags
+CXX = g++
+CC = gcc
+CXXFLAGS = -Wall -std=c++11
+CFLAGS = -Wall
 
-#Includes
-glfwIncludeFolder = deps/GLFW/include
-#glewIncludeFolder = deps/glew-2.1.0/include
-gladIncludeFolder = deps/glad/include
+# Directories
+SRC_DIR = src
+DEPS_DIR = deps
+GLFW_INCLUDE_DIR = $(DEPS_DIR)/GLFW/include
+GLAD_INCLUDE_DIR = $(DEPS_DIR)/glad/include
+GLFW_LIB_DIR = $(DEPS_DIR)/GLFW/lib
 
-#Static binary inclusions
-glfwLibraryFolder = deps/GLFW/lib
-#glewLibraryFolder = deps/glew-2.1.0/lib
+# Libraries
+LDLIBS = -lglfw3 -lGL -lGLU
+LDFLAGS = -L$(GLFW_LIB_DIR)
 
+# Targets
+EXECUTABLE = lookdraw
+SOURCES = $(wildcard $(SRC_DIR)/*.cpp) $(wildcard $(DEPS_DIR)/glad/src/glad.c)
+OBJECTS = $(SOURCES:.cpp=.o)
+OBJECTS := $(OBJECTS:.c=.o)
 
-cxxFlags=-Wall -std=c++11 -I$(glfwIncludeFolder) -I$(gladIncludeFolder)
-LDflags=-L$(glfwLibraryFolder) -lglfw3 -lGL -lGLU
+# Rules
+all: $(EXECUTABLE)
 
-ccFlags=-Wall -I$(glfwIncludeFolder) -I$(gladIncludeFolder)
-#-lGL -lGLU is for openGL
+$(EXECUTABLE): $(OBJECTS)
+	$(CXX) $(OBJECTS) $(LDFLAGS) $(LDLIBS) -o $@
 
+%.o: %.cpp
+	$(CXX) -c $< -o $@ $(CXXFLAGS) -I$(GLFW_INCLUDE_DIR) -I$(GLAD_INCLUDE_DIR)
 
-lookdraw: main.o message.o glad.o
-	$(cxx) main.o message.o glad.o $(LDflags) -o lookdraw
-
-main.o: src/main.cpp
-	$(cxx) -c src/main.cpp $(cxxFlags)
-
-message.o: src/message.cpp src/message.h
-	$(cxx) -c src/message.cpp $(cxxFlags)
-
-glad.o: deps/glad/src/glad.c
-	$(cc) -c deps/glad/src/glad.c $(ccFlags)
+%.o: %.c
+	$(CC) -c $< -o $@ $(CFLAGS) -I$(GLFW_INCLUDE_DIR) -I$(GLAD_INCLUDE_DIR)
 
 clean:
-	rm -f main.o message.o glad.o lookdraw
+	rm -f $(EXECUTABLE) $(OBJECTS)
