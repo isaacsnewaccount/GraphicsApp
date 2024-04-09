@@ -4,7 +4,7 @@ Dependencies:
 
 glm
 
-glew 2.1.0. Other versions may work.
+glad
 
 glfw 3.4. Other versions such as 3.3 may work.
 
