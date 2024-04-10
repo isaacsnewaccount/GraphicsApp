@@ -14,6 +14,7 @@ unsigned int createShaderProgram(const char* vertexShaderSource, const char* fra
 unsigned int createVertexBuffer(float* vertices, int size);
 unsigned int createVertexArray();
 void setupVertexArray(unsigned int VAO, unsigned int VBO);
+void draw();
 
 // settings
 const unsigned int screenWidth = 800;
@@ -37,6 +38,16 @@ const char *fragmentShaderSource = R"(
     }
 )";
 
+float vertices[] = {
+    -0.5f, -0.5f, 0.0f,
+     0.5f, -0.5f, 0.0f,
+     0.0f,  0.5f, 0.0f
+};
+
+unsigned int VBO;
+unsigned int VAO;
+unsigned int shaderProgram;
+
 int main(void) {
     Message message;
     message.printMessage();
@@ -45,18 +56,10 @@ int main(void) {
     GLFWwindow* window = createWindow(screenWidth, screenHeight, "Lookdraw");
     initializeGLAD();
 
-    float vertices[] = {
-        -0.5f, -0.5f, 0.0f,
-         0.5f, -0.5f, 0.0f,
-         0.0f,  0.5f, 0.0f
-    };
-
-    unsigned int VBO = createVertexBuffer(vertices, sizeof(vertices));
-    unsigned int VAO = createVertexArray();
+    VBO = createVertexBuffer(vertices, sizeof(vertices));
+    VAO = createVertexArray();
     setupVertexArray(VAO, VBO);
-
-    unsigned int shaderProgram = createShaderProgram(vertexShaderSource, fragmentShaderSource);
-
+    shaderProgram = createShaderProgram(vertexShaderSource, fragmentShaderSource);
 
     // Set callback functions
     glfwSetMouseButtonCallback(window, mouse_callback);
@@ -66,15 +69,7 @@ int main(void) {
     while (!glfwWindowShouldClose(window)) {
         processInput(window);
 
-        glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
-        glClear(GL_COLOR_BUFFER_BIT);
-
-        //enable wireframe mode
-        glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-
-        glUseProgram(shaderProgram);
-        glBindVertexArray(VAO);
-        glDrawArrays(GL_TRIANGLES, 0, 3);
+        draw();
 
         glfwPollEvents();
         glfwSwapBuffers(window);
@@ -82,6 +77,18 @@ int main(void) {
 
     glfwTerminate();
     return 0;
+}
+
+void draw() {
+    glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+    glClear(GL_COLOR_BUFFER_BIT);
+
+    //enable wireframe mode
+    glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+
+    glUseProgram(shaderProgram);
+    glBindVertexArray(VAO);
+    glDrawArrays(GL_TRIANGLES, 0, 3);
 }
 
 void initializeGLFW() {
