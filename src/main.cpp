@@ -9,7 +9,6 @@
 // Function declarations
 void initializeGLFW();
 GLFWwindow* createWindow(int width, int height, const char* title);
-void initializeGLAD();
 
 // settings
 const unsigned int screenWidth = 800;
