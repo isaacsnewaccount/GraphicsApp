@@ -1,7 +1,7 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 #include <iostream>
-//#include "message.h"
+// #include <csignal>
 #include "input.h"
 #include "app.h"
 #include "graphics.h"
@@ -14,6 +14,9 @@ void initializeGLAD();
 // settings
 const unsigned int screenWidth = 800;
 const unsigned int screenHeight = 600;
+
+const unsigned int minimumWidth = 480;
+const unsigned int minimumHeight = 211;
 
 int main(void) {
     App app;
@@ -61,6 +64,10 @@ GLFWwindow* createWindow(int width, int height, const char* title) {
         glfwTerminate();
         exit(-1);
     }
+
+    // Set minimum window size
+    glfwSetWindowSizeLimits(window, minimumWidth, minimumHeight, GLFW_DONT_CARE, GLFW_DONT_CARE);
+
     glfwMakeContextCurrent(window);
     glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
     return window;
