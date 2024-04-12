@@ -36,6 +36,8 @@ int main(void) {
     printMonitorInfo();
     initShaders();
 
+    doTextureThing();
+
     // Set input callback functions
     glfwSetMouseButtonCallback(window, mouse_callback);
     glfwSetCursorPosCallback(window, cursor_position_callback);

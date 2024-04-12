@@ -1,25 +1,8 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 #include <iostream>
+#include <cstring>
 #include "graphics.h"
-
-const char *vertexShaderSource = R"(
-    #version 330 core
-    layout (location = 0) in vec3 aPos;
-    void main()
-    {
-        gl_Position = vec4(aPos.x, aPos.y, aPos.z, 2.0);
-    }
-)";
-
-const char *fragmentShaderSource = R"(
-    #version 330 core
-    out vec4 FragColor;
-    void main()
-    {
-        FragColor = vec4(0.98f, 1.0f, 0.6f, 1.0f);
-    }
-)";
 
 float vertices[] = {
     -0.5f, -0.5f, 0.0f,
@@ -141,4 +124,29 @@ void setupVertexArray(unsigned int VAO, unsigned int VBO) {
     glBindBuffer(GL_ARRAY_BUFFER, VBO);
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
     glEnableVertexAttribArray(0);
+}
+
+void doTextureThing() {
+
+    // Define pixel data
+    unsigned char pixelData[4] = {255, 0, 0, 255}; // RGBA format (red color)
+
+    // Create texture to hold pixel data
+    GLuint texture;
+    glGenTextures(1, &texture);
+    glBindTexture(GL_TEXTURE_2D, texture);
+
+    // Set texture parameters
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+
+    // Update texture with pixel data
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, 1, 1, 0, GL_RGBA, GL_UNSIGNED_BYTE, pixelData);
+
+    // Draw a quad with the pixel as a texture
+// You need to define vertices and texture coordinates for the quad, then draw it using OpenGL functions like glDrawArrays or glDrawElements
+
+
 }
