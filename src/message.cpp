@@ -1,7 +1,7 @@
-#include <iostream>
-#include "message.h"
-using namespace std;
+// #include <iostream>
+// #include "message.h"
+// using namespace std;
 
-void Message::printMessage() {
-	cout << "Example Message\n";
-}
+// void Message::printMessage() {
+// 	cout << "Example Message\n";
+// }

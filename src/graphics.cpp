@@ -21,6 +21,14 @@ const char *fragmentShaderSource = R"(
     }
 )";
 
+float vertices[] = {
+    -0.5f, -0.5f, 0.0f,
+     0.5f, -0.5f, 0.0f,
+     0.0f,  0.5f, 0.0f
+};
+
+unsigned int VBO, VAO, shaderProgram;
+
 void printMonitorInfo() {
     // Get the list of monitors
     int monitorCount;
@@ -78,4 +86,51 @@ unsigned int compileShader(unsigned int type, const char* source) {
     }
 
     return shader;
+}
+
+void framebuffer_size_callback(GLFWwindow* window, int width, int height) {
+    std::cout << "Window resized to width: " << width << " and height: " << height << std::endl;
+    glViewport(0, 0, width, height);
+}
+
+
+void initShaders() {
+    VBO = createVertexBuffer(vertices, sizeof(vertices));
+    VAO = createVertexArray();
+    setupVertexArray(VAO, VBO);
+    shaderProgram = createShaderProgram(vertexShaderSource, fragmentShaderSource);
+}
+
+void draw() {
+    glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+    glClear(GL_COLOR_BUFFER_BIT);
+
+    //enable wireframe mode
+    glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+
+    glUseProgram(shaderProgram);
+    glBindVertexArray(VAO);
+    glDrawArrays(GL_TRIANGLES, 0, 3);
+}
+
+unsigned int createVertexBuffer(float* vertices, int size) {
+    unsigned int VBO;
+    glGenBuffers(1, &VBO);
+    glBindBuffer(GL_ARRAY_BUFFER, VBO);
+    glBufferData(GL_ARRAY_BUFFER, size, vertices, GL_STATIC_DRAW);
+    return VBO;
+}
+
+unsigned int createVertexArray() {
+    unsigned int VAO;
+    glGenVertexArrays(1, &VAO);
+    glBindVertexArray(VAO);
+    return VAO;
+}
+
+void setupVertexArray(unsigned int VAO, unsigned int VBO) {
+    glBindVertexArray(VAO);
+    glBindBuffer(GL_ARRAY_BUFFER, VBO);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+    glEnableVertexAttribArray(0);
 }
