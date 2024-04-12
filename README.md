@@ -2,7 +2,7 @@
 
 Dependencies:
 
-glm
+glm, testing with version 1.0.0
 
 glad
 

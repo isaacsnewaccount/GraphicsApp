@@ -7,6 +7,7 @@ CFLAGS = -Wall
 # Directories
 SRC_DIR = src
 DEPS_DIR = deps
+MAIN_INCLUDE_DIR = $(DEPS_DIR)/include
 GLFW_INCLUDE_DIR = $(DEPS_DIR)/GLFW/include
 GLAD_INCLUDE_DIR = $(DEPS_DIR)/glad/include
 GLFW_LIB_DIR = $(DEPS_DIR)/GLFW/lib
@@ -28,10 +29,10 @@ $(EXECUTABLE): $(OBJECTS)
 	$(CXX) $(OBJECTS) $(LDFLAGS) $(LDLIBS) -o $@
 
 %.o: %.cpp
-	$(CXX) -c $< -o $@ $(CXXFLAGS) -I$(GLFW_INCLUDE_DIR) -I$(GLAD_INCLUDE_DIR)
+	$(CXX) -c $< -o $@ $(CXXFLAGS) -I$(MAIN_INCLUDE_DIR) -I$(GLFW_INCLUDE_DIR) -I$(GLAD_INCLUDE_DIR)
 
 %.o: %.c
-	$(CC) -c $< -o $@ $(CFLAGS) -I$(GLFW_INCLUDE_DIR) -I$(GLAD_INCLUDE_DIR)
+	$(CC) -c $< -o $@ $(CFLAGS) -I$(MAIN_INCLUDE_DIR) -I$(GLFW_INCLUDE_DIR) -I$(GLAD_INCLUDE_DIR)
 
 clean:
 	rm -f $(EXECUTABLE) $(OBJECTS)
