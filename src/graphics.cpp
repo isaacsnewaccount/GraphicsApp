@@ -46,16 +46,14 @@ void draw() {
     glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
     ourShader->use();
-
-    // update the uniform color
+    // update the shader inputs
     float timeValue = glfwGetTime();
     float greenValue = sin(timeValue) / 2.0f + 0.5f;
-    
-    glm::vec4 newColor(0.0f, greenValue, 0.0f, 1.0f); // Example new vec4 values
+    glm::vec4 newColor(0.0f, greenValue, 0.0f, 1.0f);
     ourShader->setVec4("ourColor", newColor);
     
     glBindVertexArray(VAO);
-    // glDrawArrays(GL_TRIANGLES, 0, 3);
+    //glDrawArrays(GL_TRIANGLES, 0, 3);
 
     glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
     glBindVertexArray(0);
