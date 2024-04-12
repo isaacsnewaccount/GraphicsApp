@@ -63,9 +63,9 @@ cd build
 
 make
 
-get the glfw3.h and glfw3native.h files and put them in lookdraw's deps/GLFW/include folder.
+get the glfw3.h and glfw3native.h files and put them in lookdraw's deps/include/GLFW/ folder.
 
-on linux, get the libglfw3.a file and put it in lookdraw's deps/GLFW/lib folder.
+on linux, get the libglfw3.a file and put it in lookdraw's deps/lib/ folder.
 
 
 ## Building
