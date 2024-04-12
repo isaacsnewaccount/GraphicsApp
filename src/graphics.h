@@ -1,10 +1,7 @@
-#pragma once
+#ifndef graphics_h
+#define graphics_h
 
 #include <GLFW/glfw3.h>
-#include "shader.h"
-
-extern const char *vertexShaderSource;
-extern const char *fragmentShaderSource;
 
 void printMonitorInfo();
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
@@ -19,3 +16,5 @@ void setupVertexArray(unsigned int VAO, unsigned int VBO);
 void draw();
 
 void doTextureThing();
+
+#endif

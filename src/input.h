@@ -1,4 +1,5 @@
-#pragma once
+#ifndef input_h
+#define input_h
 
 #include <GLFW/glfw3.h>
 
@@ -7,3 +8,5 @@ void cursor_position_callback(GLFWwindow* window, double xpos, double ypos);
 void scroll_callback(GLFWwindow* window, double xoffset, double yoffset);
 
 void processInput(GLFWwindow *window);
+
+#endif

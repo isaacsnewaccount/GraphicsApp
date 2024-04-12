@@ -1,4 +1,5 @@
-#pragma once
+#ifndef app_h
+#define app_h
 
 // #include <iostream>
 
@@ -15,3 +16,5 @@ public:
 
     double getViewportScale() const;
 };
+
+#endif
