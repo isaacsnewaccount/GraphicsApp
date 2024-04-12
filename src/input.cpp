@@ -25,6 +25,10 @@ void cursor_position_callback(GLFWwindow* window, double xpos, double ypos) {
     }
 }
 
+void scroll_callback(GLFWwindow* window, double xoffset, double yoffset) {
+    std::cout << "Scrolled: x offset = " << xoffset << ", y offset = " << yoffset << std::endl;
+}
+
 void processInput(GLFWwindow *window) {
     if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS || 
         (glfwGetKey(window, GLFW_KEY_LEFT_CONTROL) == GLFW_PRESS && glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)) {

@@ -39,9 +39,10 @@ int main(void) {
     printMonitorInfo();
     initShaders();
 
-    // Set callback functions
+    // Set input callback functions
     glfwSetMouseButtonCallback(window, mouse_callback);
     glfwSetCursorPosCallback(window, cursor_position_callback);
+    glfwSetScrollCallback(window, scroll_callback);
 
     // Render loop
     while (!glfwWindowShouldClose(window)) {
