@@ -1,3 +1,5 @@
+//input.h - header file for input
+
 #ifndef input_h
 #define input_h
 

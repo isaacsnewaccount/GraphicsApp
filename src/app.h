@@ -1,3 +1,5 @@
+//app.h - header for the application class
+
 #ifndef app_h
 #define app_h
 

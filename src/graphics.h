@@ -1,3 +1,5 @@
+//graphics.h - header file for graphics
+
 #ifndef graphics_h
 #define graphics_h
 

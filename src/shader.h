@@ -1,3 +1,5 @@
+//shader.cpp - GLSL shader class
+
 #ifndef shader_h
 #define shader_h
 

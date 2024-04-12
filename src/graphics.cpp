@@ -1,8 +1,11 @@
+//graphics.cpp - OpenGL functions and the main draw function
+
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 #include <iostream>
 #include <cmath>
 #include <cstring>
+
 #include "graphics.h"
 #include "shader.h"
 

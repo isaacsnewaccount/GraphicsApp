@@ -1,3 +1,5 @@
+//app.cpp - application class implementation
+
 #include <iostream>
 #include "app.h"
 

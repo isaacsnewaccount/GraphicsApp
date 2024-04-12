@@ -1,3 +1,5 @@
+//input.cpp - handles input devices like keyboard and mouse
+
 #include <iostream>
 #include <GLFW/glfw3.h>
 #include "input.h"

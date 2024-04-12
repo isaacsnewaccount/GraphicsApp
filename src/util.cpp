@@ -1,10 +1,8 @@
-#include <glad/glad.h>
+//util.cpp - basic utility functions
+
 #include <GLFW/glfw3.h>
 #include <iostream>
-#include <cmath>
 #include <cstring>
-#include "graphics.h"
-#include "shader.h"
 
 void printMonitorInfo() {
     // Get the list of monitors

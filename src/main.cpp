@@ -1,8 +1,11 @@
+//main.cpp - the main entrypoint of the application
+
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 #include <iostream>
 #include <iomanip>
 #include <csignal>
+
 #include "input.h"
 #include "app.h"
 #include "graphics.h"
