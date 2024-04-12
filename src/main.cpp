@@ -6,6 +6,7 @@
 #include "input.h"
 #include "app.h"
 #include "graphics.h"
+#include "util.h"
 
 // Function declarations
 void initializeGLFW();
@@ -33,10 +34,11 @@ int main(void) {
     initializeGLFW();
     GLFWwindow* window = createWindow(screenWidth, screenHeight, "Lookdraw");
     initializeGLAD();
+    loadShaders();
     printMonitorInfo();
-    initShaders();
+    initBuffers();
 
-    doTextureThing();
+    // doTextureThing();
 
     // Set input callback functions
     glfwSetMouseButtonCallback(window, mouse_callback);
