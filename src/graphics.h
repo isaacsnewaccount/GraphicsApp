@@ -5,16 +5,18 @@
 
 #include <GLFW/glfw3.h>
 
-void framebuffer_size_callback(GLFWwindow* window, int width, int height);
+//Public
 void initializeGLAD();
-
 void initBuffers();
 void loadShaders();
+void draw();
+void framebuffer_size_callback(GLFWwindow* window, int width, int height);
+// void doTextureThing();
+
+
+//Internal
 unsigned int createVertexBuffer(float* vertices, int size);
 unsigned int createVertexArray();
 void setupVertexArray(unsigned int VAO, unsigned int VBO);
-void draw();
-
-// void doTextureThing();
 
 #endif

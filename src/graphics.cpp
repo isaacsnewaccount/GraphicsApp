@@ -60,7 +60,6 @@ void draw() {
 }
 
 void initBuffers() {
-
     VBO = createVertexBuffer(vertices, sizeof(vertices));
     VAO = createVertexArray();
 
