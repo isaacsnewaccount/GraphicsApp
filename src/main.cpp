@@ -12,7 +12,7 @@
 #include "util.h"
 
 // Function declarations
-void initializeGLFW();
+void setWindowHints();
 GLFWwindow* createWindow(int width, int height, const char* title);
 
 // settings
@@ -34,7 +34,8 @@ int main(void) {
     // Set up signal handler
     std::signal(SIGINT, signalHandler);
 
-    initializeGLFW();
+    glfwInit();
+    setWindowHints();
     GLFWwindow* window = createWindow(screenWidth, screenHeight, "Lookdraw");
     initializeGLAD();
     loadShaders();
@@ -67,9 +68,7 @@ void signalHandler(int signum) {
     exit(signum);    // Terminate the program
 }
 
-void initializeGLFW() {
-    glfwInit();
-
+void setWindowHints() {
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
@@ -77,6 +76,8 @@ void initializeGLFW() {
     #ifdef __APPLE__
     glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
     #endif
+
+    
 }
 
 GLFWwindow* createWindow(int width, int height, const char* title) {
