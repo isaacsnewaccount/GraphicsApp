@@ -5,6 +5,8 @@
 #include <iostream>
 #include <cmath>
 #include <cstring>
+#include <glm/glm.hpp>
+
 
 #include "graphics.h"
 #include "shader.h"
@@ -48,9 +50,10 @@ void draw() {
     // update the uniform color
     float timeValue = glfwGetTime();
     float greenValue = sin(timeValue) / 2.0f + 0.5f;
-    int vertexColorLocation = glGetUniformLocation(ourShader->ID, "ourColor");
-    glUniform4f(vertexColorLocation, 0.0f, greenValue, 0.0f, 1.0f);
-
+    
+    glm::vec4 newColor(0.0f, greenValue, 0.0f, 1.0f); // Example new vec4 values
+    ourShader->setVec4("ourColor", newColor);
+    
     glBindVertexArray(VAO);
     // glDrawArrays(GL_TRIANGLES, 0, 3);
 

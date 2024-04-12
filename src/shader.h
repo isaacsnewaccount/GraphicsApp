@@ -4,7 +4,7 @@
 #define shader_h
 
 #include <glad/glad.h>
-
+#include <glm/glm.hpp>
 #include <string>
 #include <fstream>
 #include <sstream>
@@ -98,6 +98,12 @@ public:
     void setFloat(const std::string &name, float value) const
     { 
         glUniform1f(glGetUniformLocation(ID, name.c_str()), value); 
+    }
+
+    // Set a vec4 uniform in the shader program
+    void setVec4(const std::string &name, const glm::vec4 &value) const
+    { 
+        glUniform4fv(glGetUniformLocation(ID, name.c_str()), 1, &value[0]); 
     }
 
 private:
