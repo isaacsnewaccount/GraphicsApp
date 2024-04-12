@@ -3,7 +3,7 @@ A graphical application.
 
 Dependencies:
 
-glm, testing with version 1.0.0
+glm, version 1.0.0. Other versions may work.
 
 glad
 
