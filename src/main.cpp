@@ -1,6 +1,7 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 #include <iostream>
+#include <iomanip>
 #include <csignal>
 #include "input.h"
 #include "app.h"
@@ -21,8 +22,10 @@ const unsigned int minimumHeight = 211;
 void signalHandler(int signum);
 
 int main(void) {
-    App app;
-    app.init();
+    App myApp;
+    myApp.init();
+    // Assuming myApp.getViewportScale() returns a float or double
+    std::cout << "Viewport Scale: " << std::fixed << std::setprecision(1) << myApp.getViewportScale() << std::endl;
 
     // Set up signal handler
     std::signal(SIGINT, signalHandler);

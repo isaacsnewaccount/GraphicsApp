@@ -3,10 +3,15 @@
 // #include <iostream>
 
 class App {
+private:
+    double viewportScale;
+    
 public:
-    // // Constructor
-    // App() {
+    App();
 
-    // }
     void init();
+
+    void setViewportScale(double scale);
+
+    double getViewportScale() const;
 };
