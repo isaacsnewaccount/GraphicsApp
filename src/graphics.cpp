@@ -4,39 +4,24 @@
 #include <cstring>
 #include "graphics.h"
 
+// float vertices[] = {
+//     -0.5f, -0.5f, 0.0f,
+//      0.5f, -0.5f, 0.0f,
+//      0.0f,  0.5f, 0.0f
+// };
+
 float vertices[] = {
-    -0.5f, -0.5f, 0.0f,
-     0.5f, -0.5f, 0.0f,
-     0.0f,  0.5f, 0.0f
+     0.5f,  0.5f, 0.0f,  // top right
+     0.5f, -0.5f, 0.0f,  // bottom right
+    -0.5f, -0.5f, 0.0f,  // bottom left
+    -0.5f,  0.5f, 0.0f   // top left 
 };
+unsigned int indices[] = {  // note that we start from 0!
+    0, 1, 3,   // first triangle
+    1, 2, 3    // second triangle
+};  
 
-unsigned int VBO, VAO, shaderProgram;
-
-void initializeGLAD() {
-    if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
-        std::cout << "Failed to initialize GLAD" << std::endl;
-        exit(-1);
-    }
-    std::cout << "OpenGL version: " << glGetString(GL_VERSION) << std::endl;
-}
-
-void printMonitorInfo() {
-    // Get the list of monitors
-    int monitorCount;
-    GLFWmonitor** monitors = glfwGetMonitors(&monitorCount);
-
-    if (monitorCount == 0) {
-        std::cout << "No monitors found" << std::endl;
-    } else {
-        std::cout << "List of monitors:" << std::endl;
-        for (int i = 0; i < monitorCount; ++i) {
-            const GLFWvidmode* mode = glfwGetVideoMode(monitors[i]);
-            if (mode != nullptr) {
-                std::cout << "    Monitor " << i+1 << ": " << glfwGetMonitorName(monitors[i]) << std::endl;
-            }
-        }
-    }
-}
+unsigned int VBO, VAO, EBO, shaderProgram;
 
 unsigned int createShaderProgram(const char* vertexShaderSource, const char* fragmentShaderSource) {
     unsigned int vertexShader = compileShader(GL_VERTEX_SHADER, vertexShaderSource);
@@ -84,14 +69,6 @@ void framebuffer_size_callback(GLFWwindow* window, int width, int height) {
     glViewport(0, 0, width, height);
 }
 
-
-void initShaders() {
-    VBO = createVertexBuffer(vertices, sizeof(vertices));
-    VAO = createVertexArray();
-    setupVertexArray(VAO, VBO);
-    shaderProgram = createShaderProgram(vertexShaderSource, fragmentShaderSource);
-}
-
 void draw() {
     glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT);
@@ -100,8 +77,36 @@ void draw() {
     glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
     glUseProgram(shaderProgram);
+
+
+    // glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
+    // glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+
+
     glBindVertexArray(VAO);
-    glDrawArrays(GL_TRIANGLES, 0, 3);
+    // glDrawArrays(GL_TRIANGLES, 0, 3);
+
+    glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+glBindVertexArray(0);
+
+
+}
+
+//misnomer. this sets up shaders and buffers
+void initShaders() {
+    VBO = createVertexBuffer(vertices, sizeof(vertices));
+    VAO = createVertexArray();
+
+    glGenBuffers(1, &EBO);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
+
+// 4. then set the vertex attributes pointers
+glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+glEnableVertexAttribArray(0);  
+
+    // setupVertexArray(VAO, VBO);
+    shaderProgram = createShaderProgram(vertexShaderSource, fragmentShaderSource);
 }
 
 unsigned int createVertexBuffer(float* vertices, int size) {
@@ -149,4 +154,30 @@ void doTextureThing() {
     // // You need to define vertices and texture coordinates for the quad, then draw it using OpenGL functions like glDrawArrays or glDrawElements
 
 
+}
+
+void initializeGLAD() {
+    if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
+        std::cout << "Failed to initialize GLAD" << std::endl;
+        exit(-1);
+    }
+    std::cout << "OpenGL version: " << glGetString(GL_VERSION) << std::endl;
+}
+
+void printMonitorInfo() {
+    // Get the list of monitors
+    int monitorCount;
+    GLFWmonitor** monitors = glfwGetMonitors(&monitorCount);
+
+    if (monitorCount == 0) {
+        std::cout << "No monitors found" << std::endl;
+    } else {
+        std::cout << "List of monitors:" << std::endl;
+        for (int i = 0; i < monitorCount; ++i) {
+            const GLFWvidmode* mode = glfwGetVideoMode(monitors[i]);
+            if (mode != nullptr) {
+                std::cout << "    Monitor " << i+1 << ": " << glfwGetMonitorName(monitors[i]) << std::endl;
+            }
+        }
+    }
 }
