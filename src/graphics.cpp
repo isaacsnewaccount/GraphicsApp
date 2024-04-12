@@ -87,13 +87,12 @@ void draw() {
     // glDrawArrays(GL_TRIANGLES, 0, 3);
 
     glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
-glBindVertexArray(0);
-
-
+    glBindVertexArray(0);
 }
 
 //misnomer. this sets up shaders and buffers
 void initShaders() {
+
     VBO = createVertexBuffer(vertices, sizeof(vertices));
     VAO = createVertexArray();
 
