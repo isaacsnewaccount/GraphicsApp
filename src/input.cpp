@@ -2,25 +2,39 @@
 #include <GLFW/glfw3.h>
 #include "input.h"
 
-bool mouseIsDown = false;
+bool leftMouseIsDown = false;
 
 void mouse_callback(GLFWwindow* window, int button, int action, int mods) {
-    if (button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_PRESS) {
-        double xpos, ypos;
-        glfwGetCursorPos(window, &xpos, &ypos);
-        mouseIsDown = true;
-        std::cout << "Mouse down at position: (" << xpos << ", " << ypos << ")" << std::endl;
-    }
-    else if (button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_RELEASE) {
-        double xpos, ypos;
-        glfwGetCursorPos(window, &xpos, &ypos);
-        mouseIsDown = false;
-        std::cout << "Mouse up at position: (" << xpos << ", " << ypos << ")" << std::endl;
+    double xpos, ypos;
+    glfwGetCursorPos(window, &xpos, &ypos);
+    
+    switch (action) {
+        case GLFW_PRESS:
+            if (button == GLFW_MOUSE_BUTTON_LEFT) {
+                leftMouseIsDown = true;
+                std::cout << "Left mouse down at position: (" << xpos << ", " << ypos << ")" << std::endl;
+            } else if (button == GLFW_MOUSE_BUTTON_RIGHT) {
+                //mouseIsDown = true;
+                std::cout << "Right mouse down at position: (" << xpos << ", " << ypos << ")" << std::endl;
+            }
+            break;
+        case GLFW_RELEASE:
+            if (button == GLFW_MOUSE_BUTTON_LEFT) {
+                leftMouseIsDown = false;
+                std::cout << "Left mouse up at position: (" << xpos << ", " << ypos << ")" << std::endl;
+            } else if (button == GLFW_MOUSE_BUTTON_RIGHT) {
+                //mouseIsDown = false;
+                std::cout << "Right mouse up at position: (" << xpos << ", " << ypos << ")" << std::endl;
+            }
+            break;
+        default:
+            break;
     }
 }
 
+
 void cursor_position_callback(GLFWwindow* window, double xpos, double ypos) {
-    if (mouseIsDown) {
+    if (leftMouseIsDown) {
         std::cout << "Mouse moved to position: (" << xpos << ", " << ypos << ")" << std::endl;
     }
 }
