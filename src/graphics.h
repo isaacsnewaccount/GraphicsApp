@@ -7,6 +7,7 @@ extern const char *fragmentShaderSource;
 
 void printMonitorInfo();
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
+void initializeGLAD();
 
 void initShaders();
 unsigned int createShaderProgram(const char* vertexShaderSource, const char* fragmentShaderSource);

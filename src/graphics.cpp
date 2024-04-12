@@ -29,6 +29,14 @@ float vertices[] = {
 
 unsigned int VBO, VAO, shaderProgram;
 
+void initializeGLAD() {
+    if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
+        std::cout << "Failed to initialize GLAD" << std::endl;
+        exit(-1);
+    }
+    std::cout << "OpenGL version: " << glGetString(GL_VERSION) << std::endl;
+}
+
 void printMonitorInfo() {
     // Get the list of monitors
     int monitorCount;

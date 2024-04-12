@@ -1,7 +1,7 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 #include <iostream>
-// #include <csignal>
+#include <csignal>
 #include "input.h"
 #include "app.h"
 #include "graphics.h"
@@ -15,12 +15,18 @@ void initializeGLAD();
 const unsigned int screenWidth = 800;
 const unsigned int screenHeight = 600;
 
-const unsigned int minimumWidth = 480;
+const unsigned int minimumWidth = 420;
 const unsigned int minimumHeight = 211;
+
+// Signal handler function
+void signalHandler(int signum);
 
 int main(void) {
     App app;
     app.init();
+
+    // Set up signal handler
+    std::signal(SIGINT, signalHandler);
 
     initializeGLFW();
     GLFWwindow* window = createWindow(screenWidth, screenHeight, "Lookdraw");
@@ -41,8 +47,15 @@ int main(void) {
         glfwSwapBuffers(window);
     }
 
+    glfwDestroyWindow(window);
     glfwTerminate();
     return 0;
+}
+
+void signalHandler(int signum) {
+    std::cout << "\nCtrl+C pressed, shutting down gracefully..." << std::endl;
+    glfwTerminate(); // Terminate GLFW
+    exit(signum);    // Terminate the program
 }
 
 void initializeGLFW() {
@@ -71,12 +84,4 @@ GLFWwindow* createWindow(int width, int height, const char* title) {
     glfwMakeContextCurrent(window);
     glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
     return window;
-}
-
-void initializeGLAD() {
-    if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
-        std::cout << "Failed to initialize GLAD" << std::endl;
-        exit(-1);
-    }
-    std::cout << "OpenGL version: " << glGetString(GL_VERSION) << std::endl;
 }
