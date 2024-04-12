@@ -11,12 +11,11 @@ void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 void initializeGLFW();
 GLFWwindow* createWindow(int width, int height, const char* title);
 void initializeGLAD();
-unsigned int compileShader(unsigned int type, const char* source);
-unsigned int createShaderProgram(const char* vertexShaderSource, const char* fragmentShaderSource);
 unsigned int createVertexBuffer(float* vertices, int size);
 unsigned int createVertexArray();
 void setupVertexArray(unsigned int VAO, unsigned int VBO);
 void draw();
+void initShaders();
 
 // settings
 const unsigned int screenWidth = 800;
@@ -28,9 +27,7 @@ float vertices[] = {
      0.0f,  0.5f, 0.0f
 };
 
-unsigned int VBO;
-unsigned int VAO;
-unsigned int shaderProgram;
+unsigned int VBO, VAO, shaderProgram;
 
 int main(void) {
     App app;
@@ -40,11 +37,7 @@ int main(void) {
     GLFWwindow* window = createWindow(screenWidth, screenHeight, "Lookdraw");
     initializeGLAD();
     printMonitorInfo();
-
-    VBO = createVertexBuffer(vertices, sizeof(vertices));
-    VAO = createVertexArray();
-    setupVertexArray(VAO, VBO);
-    shaderProgram = createShaderProgram(vertexShaderSource, fragmentShaderSource);
+    initShaders();
 
     // Set callback functions
     glfwSetMouseButtonCallback(window, mouse_callback);
@@ -53,15 +46,20 @@ int main(void) {
     // Render loop
     while (!glfwWindowShouldClose(window)) {
         processInput(window);
-
         draw();
-
         glfwPollEvents();
         glfwSwapBuffers(window);
     }
 
     glfwTerminate();
     return 0;
+}
+
+void initShaders() {
+    VBO = createVertexBuffer(vertices, sizeof(vertices));
+    VAO = createVertexArray();
+    setupVertexArray(VAO, VBO);
+    shaderProgram = createShaderProgram(vertexShaderSource, fragmentShaderSource);
 }
 
 void draw() {
@@ -106,47 +104,6 @@ void initializeGLAD() {
         exit(-1);
     }
     std::cout << "OpenGL version: " << glGetString(GL_VERSION) << std::endl;
-}
-
-unsigned int compileShader(unsigned int type, const char* source) {
-    unsigned int shader = glCreateShader(type);
-    glShaderSource(shader, 1, &source, NULL);
-    glCompileShader(shader);
-
-    int success;
-    char infoLog[512];
-    glGetShaderiv(shader, GL_COMPILE_STATUS, &success);
-    if (!success) {
-        glGetShaderInfoLog(shader, 512, NULL, infoLog);
-        std::cout << "ERROR::SHADER::COMPILATION_FAILED\n" << infoLog << std::endl;
-        exit(-1);
-    }
-
-    return shader;
-}
-
-unsigned int createShaderProgram(const char* vertexShaderSource, const char* fragmentShaderSource) {
-    unsigned int vertexShader = compileShader(GL_VERTEX_SHADER, vertexShaderSource);
-    unsigned int fragmentShader = compileShader(GL_FRAGMENT_SHADER, fragmentShaderSource);
-
-    unsigned int shaderProgram = glCreateProgram();
-    glAttachShader(shaderProgram, vertexShader);
-    glAttachShader(shaderProgram, fragmentShader);
-    glLinkProgram(shaderProgram);
-
-    int success;
-    char infoLog[512];
-    glGetProgramiv(shaderProgram, GL_LINK_STATUS, &success);
-    if (!success) {
-        glGetProgramInfoLog(shaderProgram, 512, NULL, infoLog);
-        std::cout << "ERROR::SHADER::PROGRAM::LINKING_FAILED\n" << infoLog << std::endl;
-        exit(-1);
-    }
-
-    glDeleteShader(vertexShader);
-    glDeleteShader(fragmentShader);
-
-    return shaderProgram;
 }
 
 unsigned int createVertexBuffer(float* vertices, int size) {
