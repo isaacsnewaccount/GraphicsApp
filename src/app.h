@@ -1,14 +1,16 @@
-// #pragma once
+#pragma once
 
 // #include <iostream>
 
-
-class Application {
+class App {
 public:
-    // Constructor
-    Application() {
+    // // Constructor
+    // App() {
 
-    }
+    // }
+
+    // void printInfo();
+    void init();
 };
 
 
