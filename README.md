@@ -1,4 +1,5 @@
 # Lookdraw
+A graphical application.
 
 Dependencies:
 
