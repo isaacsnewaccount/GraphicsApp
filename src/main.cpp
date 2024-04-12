@@ -4,6 +4,7 @@
 #include "message.h"
 #include "input.h"
 #include "app.h"
+#include "graphics.h"
 
 // Function declarations
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
@@ -16,7 +17,6 @@ unsigned int createVertexBuffer(float* vertices, int size);
 unsigned int createVertexArray();
 void setupVertexArray(unsigned int VAO, unsigned int VBO);
 void draw();
-void printMonitorInfo();
 
 // settings
 const unsigned int screenWidth = 800;
@@ -51,15 +51,13 @@ unsigned int VAO;
 unsigned int shaderProgram;
 
 int main(void) {
-    // Message message;
     App app;
     app.init();
-
-//    message.printMessage();
 
     initializeGLFW();
     GLFWwindow* window = createWindow(screenWidth, screenHeight, "Lookdraw");
     initializeGLAD();
+    printMonitorInfo();
 
     VBO = createVertexBuffer(vertices, sizeof(vertices));
     VAO = createVertexArray();
@@ -96,28 +94,8 @@ void draw() {
     glDrawArrays(GL_TRIANGLES, 0, 3);
 }
 
-void printMonitorInfo() {
-    // Get the list of monitors
-    int monitorCount;
-    GLFWmonitor** monitors = glfwGetMonitors(&monitorCount);
-
-    if (monitorCount == 0) {
-        std::cout << "No monitors found" << std::endl;
-    } else {
-        std::cout << "List of monitors:" << std::endl;
-        for (int i = 0; i < monitorCount; ++i) {
-            const GLFWvidmode* mode = glfwGetVideoMode(monitors[i]);
-            if (mode != nullptr) {
-                std::cout << "    Monitor " << i+1 << ": " << glfwGetMonitorName(monitors[i]) << std::endl;
-            }
-        }
-    }
-}
-
 void initializeGLFW() {
     glfwInit();
-
-    printMonitorInfo();
 
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
