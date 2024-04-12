@@ -1,6 +1,7 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 #include <iostream>
+#include <cmath>
 #include <cstring>
 #include "graphics.h"
 
@@ -77,6 +78,14 @@ void draw() {
     glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
     glUseProgram(shaderProgram);
+
+
+  
+    // update the uniform color
+    float timeValue = glfwGetTime();
+    float greenValue = sin(timeValue) / 2.0f + 0.5f;
+    int vertexColorLocation = glGetUniformLocation(shaderProgram, "ourColor");
+    glUniform4f(vertexColorLocation, 0.0f, greenValue, 0.0f, 1.0f);
 
 
     // glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
