@@ -30,10 +30,24 @@ Shader* ourShader = nullptr;
 
 //basic triangle
 float vertices[] = {
-    0.0f,  0.5f, 0.0f,  // top center
-   -0.5f, -0.5f, 0.0f,  // bottom left
-    0.5f, -0.5f, 0.0f   // bottom right
+    // First triangle
+    -0.2f,  0.15f, 0.0f,   // top center
+   -0.3f, -0.05f, 0.0f,   // bottom left
+    0.0f, -0.05f, 0.0f,   // bottom right
+
+    // Second triangle
+    -0.05f, -0.2f, 0.0f,   // top center
+   -0.35f, -0.35f, 0.0f, // bottom left
+   -0.05f, -0.35f, 0.0f, // bottom right
+
+    // Third triangle
+    0.2f, -0.2f, 0.0f,   // top center
+   -0.05f, -0.35f, 0.0f, // bottom left
+    0.35f, -0.35f, 0.0f  // bottom right
 };
+
+
+
 // unsigned int indices[] = {  // note that we start from 0!
 //     0, 1, 2,   // first triangle
 // };  
@@ -73,7 +87,9 @@ void draw() {
 
 
     glBindVertexArray(VAO);
-    glDrawArrays(GL_TRIANGLES, 0, 3);
+
+    int vertexCount = sizeof(vertices) / sizeof(vertices[0]);
+    glDrawArrays(GL_TRIANGLES, 0, vertexCount);
 
     // glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
     glBindVertexArray(0);
