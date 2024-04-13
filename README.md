@@ -9,9 +9,9 @@ glad
 
 glfw 3.4. Other versions such as 3.3 may work.
 
-FreeType, testing version 2.13.2
+FreeType, testing version 2.10.0
 
-Tested on Ubuntu/Kubuntu 22.04
+Tested on Ubuntu/Kubuntu 22.04. Compilers tested for the main program and dependencies are g++ and gcc version 11.40 (Ubuntu 11.4.0-1ubuntu1~22.04).
 
 The dependencies are local to the project and statically linked for greater portability.
 
