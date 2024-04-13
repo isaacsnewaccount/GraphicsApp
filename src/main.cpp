@@ -90,7 +90,7 @@ int main(void) {
 }
 
 void signalHandler(int signum) {
-    std::cout << "\nCtrl+C pressed, shutting down gracefully..." << std::endl;
+    std::cout << "\nCtrl+C pressed, shutting down..." << std::endl;
     glfwTerminate(); // Terminate GLFW
     exit(signum);    // Terminate the program
 }
