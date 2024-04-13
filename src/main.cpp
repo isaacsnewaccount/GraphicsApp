@@ -10,6 +10,8 @@
 #include "app.h"
 #include "graphics.h"
 #include "util.h"
+#include "Object.h"
+#include "Scene.h"
 
 // Function declarations
 void setWindowHints();
@@ -30,6 +32,16 @@ int main(void) {
     myApp.init();
     // Assuming myApp.getViewportScale() returns a float or double
     std::cout << "Viewport Scale: " << std::fixed << std::setprecision(1) << myApp.getViewportScale() << std::endl;
+
+
+    Scene scene;
+    scene.addObject(Object(100, 100));
+    scene.addObject(Object(200, 300));
+    scene.addObject(Object(400, 200));
+
+    scene.printObjects();
+
+
 
     // Set up signal handler
     std::signal(SIGINT, signalHandler);
