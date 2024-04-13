@@ -23,6 +23,7 @@ The authors of this software include the operator of the "Isaacsnewaccount" GitH
 All copyright and intellectual property rights pertaining to the materials, content, and any associated creations herein are owned by the authors under jurisdiction of U.S copyright law. Noncommercial personal use and distribution are permitted. Commercial use and distribution are prohibited.
 
 ## Build setup
+To setup the dependencies from their originally distributed files
 ### Download GLAD and GLFW
 
 GLAD example link (Download API gl version 4.6 for example):
@@ -47,25 +48,24 @@ GLFW is statically linked in this application.
 GLFW requires CMake. Install it.
 
 other deps:
-
+```
 sudo apt install xorg-dev
 
 sudo apt install libwayland-dev libxkbcommon-dev wayland-protocols extra-cmake-modules
-
+```
 #### Generating build files
 cd into the glfw directory, which is the one with "docs", "tests", "src", "include", and more files. In my case the directory is named glfw-3.4 after unzipping.
 
 run:
-
+```
 cmake -S . -B build
-
-
+```
 then cd into the "build" folder and run "make":
-
+```
 cd build
 
 make
-
+```
 get the glfw3.h and glfw3native.h files and put them in lookdraw's deps/include/GLFW/ folder.
 
 on linux, get the libglfw3.a file and put it in lookdraw's deps/lib/ folder.
