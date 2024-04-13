@@ -1,7 +1,7 @@
 #include "Scene.h"
 #include <iostream>
 
-void Scene::addObject(const Object& obj) {
+void Scene::addObject(const OpticalObject& obj) {
     objects.push_back(obj);
 }
 

@@ -10,7 +10,7 @@
 #include "app.h"
 #include "graphics.h"
 #include "util.h"
-#include "Object.h"
+#include "OpticalObject.h"
 #include "Scene.h"
 
 // Function declarations
@@ -35,9 +35,9 @@ int main(void) {
 
 
     Scene scene;
-    scene.addObject(Object(100, 100));
-    scene.addObject(Object(200, 300));
-    scene.addObject(Object(400, 200));
+    scene.addObject(OpticalObject(100, 100));
+    scene.addObject(OpticalObject(200, 300));
+    scene.addObject(OpticalObject(400, 200));
 
     scene.printObjects();
 
