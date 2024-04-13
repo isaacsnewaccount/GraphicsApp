@@ -34,9 +34,19 @@ int main(void) {
     // Set up signal handler
     std::signal(SIGINT, signalHandler);
 
-    glfwInit();
+    if (!glfwInit()) {
+        std::cerr << "Failed to initialize GLFW" << std::endl;
+        return -1;
+    }
+
     setWindowHints();
     GLFWwindow* window = createWindow(screenWidth, screenHeight, "Lookdraw");
+    if (!window) {
+        std::cerr << "Failed to create GLFW window" << std::endl;
+        glfwTerminate();
+        return -1;
+    }
+
     initializeGLAD();
     loadShaders();
     printMonitorInfo();
@@ -49,8 +59,25 @@ int main(void) {
     glfwSetCursorPosCallback(window, cursor_position_callback);
     glfwSetScrollCallback(window, scroll_callback);
 
+
+    // Variables for FPS calculation
+    double lastTime = glfwGetTime();
+    int nbFrames = 0;
+
     // Render loop
     while (!glfwWindowShouldClose(window)) {
+        // Measure time
+        double currentTime = glfwGetTime();
+        nbFrames++;
+
+        // If 1 second has passed
+        if (currentTime - lastTime >= 1.0) {
+            // Display FPS
+            std::cout << "FPS: " << nbFrames << std::endl;
+            nbFrames = 0;
+            lastTime += 1.0;
+        }
+
         processInput(window);
         draw();
         glfwPollEvents();
@@ -77,7 +104,8 @@ void setWindowHints() {
     glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
     #endif
 
-    
+
+    glfwWindowHint(GLFW_SAMPLES, 8);
 }
 
 GLFWwindow* createWindow(int width, int height, const char* title) {
