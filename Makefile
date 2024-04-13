@@ -6,7 +6,7 @@ CFLAGS = -Wall
 
 # Directories
 SRC_DIR = src
-DEPS_DIR = deps
+DEPS_DIR = third-party
 MAIN_INCLUDE_DIR = $(DEPS_DIR)/include
 MAIN_LIB_DIR = $(DEPS_DIR)/lib
 
