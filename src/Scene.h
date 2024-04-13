@@ -2,6 +2,8 @@
 #define SCENE_H
 
 #include <vector>
+
+#include "Object.h"
 #include "OpticalObject.h"
 
 class Scene {
