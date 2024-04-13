@@ -1,7 +1,7 @@
-//graphics.h - header file for graphics
+//gl_renderer.h - header file for opengl graphics
 
-#ifndef graphics_h
-#define graphics_h
+#ifndef gl_renderer_h
+#define gl_renderer_h
 
 #include <GLFW/glfw3.h>
 
@@ -11,7 +11,6 @@ void initBuffers();
 void loadShaders();
 void draw();
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
-// void doTextureThing();
 
 
 //Internal

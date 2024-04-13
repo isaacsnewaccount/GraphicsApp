@@ -1,4 +1,4 @@
-//graphics.cpp - OpenGL functions and the main draw function
+//gl_renderer.cpp - OpenGL functions and the main draw function
 
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
@@ -8,7 +8,7 @@
 #include <glm/glm.hpp>
 
 
-#include "graphics.h"
+#include "gl_renderer.h"
 #include "shader.h"
 
 // Declare ourShader as a pointer globally
@@ -56,7 +56,7 @@ void framebuffer_size_callback(GLFWwindow* window, int width, int height) {
 
 void loadShaders() {
     // Create new shader called basic
-    ourShader = new Shader("src/shaders/basic.vs", "src/shaders/basic.fs");
+    ourShader = new Shader("assets/shaders/basic.vert", "assets/shaders/basic.frag");
 }
 
 void draw() {

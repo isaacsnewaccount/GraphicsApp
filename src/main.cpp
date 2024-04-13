@@ -8,7 +8,7 @@
 
 #include "input.h"
 #include "app.h"
-#include "graphics.h"
+#include "gl_renderer.h"
 #include "util.h"
 #include "OpticalObject.h"
 #include "Scene.h"
@@ -29,6 +29,9 @@ void signalHandler(int signum);
 
 int main(void) {
     App myApp;
+    // return myApp.exec();
+
+    
     myApp.init();
     // Assuming myApp.getViewportScale() returns a float or double
     std::cout << "Viewport Scale: " << std::fixed << std::setprecision(1) << myApp.getViewportScale() << std::endl;
