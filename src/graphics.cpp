@@ -66,10 +66,14 @@ void draw() {
 
     ourShader->use();
     // update the shader inputs
-    float timeValue = glfwGetTime();
-    float greenValue = sin(timeValue) / 2.0f + 0.5f;
-    glm::vec4 newColor(0.0f, greenValue, 0.0f, 1.0f);
-    ourShader->setVec4("ourColor", newColor);
+    double timeValue = glfwGetTime();
+
+
+    // float greenValue = sin(3.0 * timeValue) / 2.0f + 0.5f;
+    // glm::vec4 newColor(0.0f, greenValue, 0.0f, 1.0f);
+
+    ourShader->setFloat("iTime", timeValue);
+    // ourShader->setVec4("ourColor", newColor);
     
     glBindVertexArray(VAO);
     //glDrawArrays(GL_TRIANGLES, 0, 3);
