@@ -15,25 +15,25 @@
 Shader* ourShader = nullptr;
 
 
-////rectangle
-float vertices[] = {
-     0.5f,  0.5f, 0.0f,  // top right
-     0.5f, -0.5f, 0.0f,  // bottom right
-    -0.5f, -0.5f, 0.0f,  // bottom left
-    -0.5f,  0.5f, 0.0f   // top left 
-};
-unsigned int indices[] = {  // note that we start from 0!
-    0, 1, 3,   // first triangle
-    1, 2, 3    // second triangle
-};  
-
-
-// //basic triangle
+// ////rectangle
 // float vertices[] = {
-//     0.0f,  0.5f, 0.0f,  // top center
-//    -0.5f, -0.5f, 0.0f,  // bottom left
-//     0.5f, -0.5f, 0.0f   // bottom right
+//      0.5f,  0.5f, 0.0f,  // top right
+//      0.5f, -0.5f, 0.0f,  // bottom right
+//     -0.5f, -0.5f, 0.0f,  // bottom left
+//     -0.5f,  0.5f, 0.0f   // top left 
 // };
+// unsigned int indices[] = {  // note that we start from 0!
+//     0, 1, 3,   // first triangle
+//     1, 2, 3    // second triangle
+// };  
+
+
+//basic triangle
+float vertices[] = {
+    0.0f,  0.5f, 0.0f,  // top center
+   -0.5f, -0.5f, 0.0f,  // bottom left
+    0.5f, -0.5f, 0.0f   // bottom right
+};
 // unsigned int indices[] = {  // note that we start from 0!
 //     0, 1, 2,   // first triangle
 // };  
@@ -69,28 +69,29 @@ void draw() {
     ourShader->use();
     // update the shader inputs
     double timeValue = glfwGetTime();
-
-
-    // float greenValue = sin(3.0 * timeValue) / 2.0f + 0.5f;
-    // glm::vec4 newColor(0.0f, greenValue, 0.0f, 1.0f);
-
     ourShader->setFloat("iTime", timeValue);
-    // ourShader->setVec4("ourColor", newColor);
-    
-    glBindVertexArray(VAO);
-    //glDrawArrays(GL_TRIANGLES, 0, 3);
 
-    glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+
+    glBindVertexArray(VAO);
+    glDrawArrays(GL_TRIANGLES, 0, 3);
+
+    // glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
     glBindVertexArray(0);
 }
+
+
+//Unused
+// void setupEBO() {
+//     glGenBuffers(1, &EBO);
+//     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
+//     glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
+// }
 
 void initBuffers() {
     VBO = createVertexBuffer(vertices, sizeof(vertices));
     VAO = createVertexArray();
 
-    glGenBuffers(1, &EBO);
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
+    // setupEBO();
 
     // set the vertex attributes pointers
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
