@@ -11,6 +11,8 @@ glfw 3.4. Other versions such as 3.3 may work.
 
 FreeType, testing version 2.10.0
 
+The projct uses CMake to build. Tested with version 3.22.1. Other versions may work. The project originally used Unix Make. The original unix makefiles are available as older git commits.
+
 Tested on Ubuntu/Kubuntu 22.04. Compilers tested for the main program and dependencies are g++ and gcc version 11.40 (Ubuntu 11.4.0-1ubuntu1~22.04).
 
 The dependencies are local to the project and statically linked for greater portability.
@@ -72,6 +74,19 @@ on linux, get the libglfw3.a file and put it in lookdraw's third-party/lib/ fold
 
 
 ## Building
-type "make" at the terminal
+Building uses cmake.
+
+make a build folder and cd into it:
+```
+mkdir build && cd build
+```
+
+Then configure the build system using cmake:
+
+```
+cmake ..
+```
+
+Then type "make" at the terminal
 
 to run, type "./lookdraw"
