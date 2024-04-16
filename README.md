@@ -89,4 +89,4 @@ cmake ..
 
 Then type "make" at the terminal
 
-to run, type "./lookdraw"
+to run, type "./graphicsapp"
