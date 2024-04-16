@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.10)
-project(LookDraw)
+project(GraphicsApp)
 
 # Compiler flags
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -std=c++11")
@@ -16,7 +16,7 @@ set(LD_LIBS glfw3 GL GLU)
 link_directories(${MAIN_LIB_DIR})
 
 # Targets
-set(EXECUTABLE lookdraw)
+set(EXECUTABLE graphicsapp)
 file(GLOB SOURCES ${SRC_DIR}/*.cpp ${DEPS_DIR}/glad/src/glad.c)
 
 # Rules

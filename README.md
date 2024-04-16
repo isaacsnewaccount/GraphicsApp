@@ -24,7 +24,25 @@ The authors of this software include the operator of the "Isaacsnewaccount" GitH
 
 All copyright and intellectual property rights pertaining to the materials, content, and any associated creations herein are owned by the authors under jurisdiction of U.S copyright law. Noncommercial personal use and distribution are permitted. Commercial use and distribution are prohibited.
 
-## Build setup
+## Building
+Building uses cmake.
+
+make a build folder and cd into it:
+```
+mkdir build && cd build
+```
+
+Then configure the build system using cmake:
+
+```
+cmake ..
+```
+
+Then type "make" at the terminal
+
+to run, type "./graphicsapp"
+
+## Dependency setup
 To setup the dependencies from their originally distributed files
 ### Download GLAD and GLFW
 
@@ -71,22 +89,3 @@ make
 get the glfw3.h and glfw3native.h files and put them in GraphicsApp's third-party/include/GLFW/ folder.
 
 on linux, get the libglfw3.a file and put it in GraphicsApp's third-party/lib/ folder.
-
-
-## Building
-Building uses cmake.
-
-make a build folder and cd into it:
-```
-mkdir build && cd build
-```
-
-Then configure the build system using cmake:
-
-```
-cmake ..
-```
-
-Then type "make" at the terminal
-
-to run, type "./graphicsapp"

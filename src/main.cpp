@@ -55,7 +55,7 @@ int main(void) {
     }
 
     setWindowHints();
-    GLFWwindow* window = createWindow(screenWidth, screenHeight, "Lookdraw");
+    GLFWwindow* window = createWindow(screenWidth, screenHeight, "GraphicsApp");
     if (!window) {
         std::cerr << "Failed to create GLFW window" << std::endl;
         glfwTerminate();
