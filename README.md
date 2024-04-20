@@ -3,6 +3,8 @@ A graphical application.
 
 Dependencies:
 
+cmake, Tested with version 3.22.1. Other versions may work. The project originally used Unix Make. The original unix makefiles are available as older git commits.
+
 glm, version 1.0.0. Other versions may work.
 
 glad
@@ -10,8 +12,6 @@ glad
 glfw 3.4. Other versions such as 3.3 may work.
 
 FreeType, testing version 2.10.0
-
-The projct uses CMake to build. Tested with version 3.22.1. Other versions may work. The project originally used Unix Make. The original unix makefiles are available as older git commits.
 
 Tested on Ubuntu/Kubuntu 22.04. Compilers tested for the main program and dependencies are g++ and gcc version 11.40 (Ubuntu 11.4.0-1ubuntu1~22.04).
 
